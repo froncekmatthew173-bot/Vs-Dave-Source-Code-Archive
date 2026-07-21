@@ -615,7 +615,7 @@ class PlayState extends MusicBeatState
 			{
 				case 'house' | 'insanity' | 'supernovae' | 'warmup':
 					stageCheck = 'house';
-				case 'polygonized':
+				case 'polygonized' | 'interdimensional-but-polygonized':
 					stageCheck = 'red-void';
 				case 'blocked' | 'corn-theft' | 'maze' | 'indignancy':
 					stageCheck = 'farm';
@@ -673,6 +673,15 @@ class PlayState extends MusicBeatState
 				for (bgSprite in revertedBG)
 				{
 					bgSprite.color = getBackgroundColor(SONG.song.toLowerCase() != 'interdimensional' ? 'daveHouse_night' : 'festival');
+					bgSprite.alpha = 0;
+				}
+			
+			case 'interdimensional-but-polygonized':
+				var stage = SONG.song.toLowerCase() != 'interdimensional-but-polygonized' ? 'house-night' : 'house-night';
+				revertedBG = createBackgroundSprites(stage, true);
+				for (bgSprite in revertedBG)
+				{
+					bgSprite.color = getBackgroundColor(SONG.song.toLowerCase() != 'interdimensional-but-polygonized' ? 'daveHouse_night' : 'daveHouse_night');
 					bgSprite.alpha = 0;
 				}
 		}
@@ -5859,6 +5868,54 @@ class PlayState extends MusicBeatState
 						canFloat = false;
 						FlxG.camera.flash(FlxColor.WHITE, 0.25);
 						switchDad('dave-festival', dad.getPosition(), false);
+
+						regenerateStaticArrows(0);
+						
+						var color = getBackgroundColor(curStage);
+
+						FlxTween.color(dad, 0.6, dad.color, color);
+						if (formoverride != 'tristan-golden-glowing')
+						{
+							FlxTween.color(boyfriend, 0.6, boyfriend.color, color);
+						}
+						FlxTween.color(gf, 0.6, gf.color, color);
+
+						FlxTween.linearMotion(dad, dad.x, dad.y, 100 + dad.globalOffset[0], 450 + dad.globalOffset[1], 0.6, true);
+						
+						boyfriend.canDance = false;
+						gf.canDance = false;
+						boyfriend.playAnim('hey', true);
+						gf.playAnim('cheer', true);
+				}
+
+			case 'interdimensional-but-polygonized':
+				switch(curStep)
+				{
+					case 378:
+						FlxG.camera.fade(FlxColor.WHITE, 0.3, false);
+					case 384:
+						black = new FlxSprite(0,0).makeGraphic(2560, 1440, FlxColor.BLACK);
+						black.screenCenter();
+						black.alpha = 0.4;
+						add(black);
+						defaultCamZoom += 0.2;
+						FlxG.camera.fade(FlxColor.WHITE, 0.5, true);
+					case 512:
+						defaultCamZoom -= 0.1;
+					case 2688:
+						defaultCamZoom = 0.7;
+						for (bgSprite in backgroundSprites)
+						{
+							FlxTween.tween(bgSprite, {alpha: 0}, 1);
+						}
+						for (bgSprite in revertedBG)
+						{
+							FlxTween.tween(bgSprite, {alpha: 1}, 1);
+						}
+
+						canFloat = false;
+						FlxG.camera.flash(FlxColor.WHITE, 0.25);
+						switchDad('dave-old', dad.getPosition(), false);
 
 						regenerateStaticArrows(0);
 						
