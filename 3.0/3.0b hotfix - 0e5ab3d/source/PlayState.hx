@@ -1399,6 +1399,9 @@ class PlayState extends MusicBeatState
 					case 'house':
 						stageName = 'daveHouse';
 						skyType = 'sky';
+					case 'house-night-old'
+						skyType = 'sky_night';
+						assetType = 'night/';
 					case 'house-night':
 						stageName = 'daveHouse_night';
 						skyType = 'sky_night';
@@ -1445,6 +1448,46 @@ class PlayState extends MusicBeatState
 					gate.color = variantColor;
 					stageFront.color = variantColor;
 				}
+			if (dad.curCharacter == "dave-old") {
+				defaultCamZoom = 0.9;
+				curStage = 'daveHouse';
+				var bg:BGSprite = new BGSprite('bg', -600, -300, Paths.image('backgrounds/shared/${skyType}'), null, 0.6, 0.6);
+				sprites.add(bg);
+				add(bg);
+
+				sprites.add(bg);
+				add(bg);
+	
+				var stageHills:FlxSprite = new FlxSprite(-225, -125).loadGraphic(Paths.image('dave/hills'));
+				stageHills.setGraphicSize(Std.int(stageHills.width * 1.25));
+				stageHills.updateHitbox();
+				stageHills.antialiasing = true;
+				stageHills.scrollFactor.set(0.8, 0.8);
+				stageHills.active = false;
+				
+				sprites.add(stageHills);
+				add(stageHills);
+	
+				var gate:FlxSprite = new FlxSprite(-200, -125).loadGraphic(Paths.image('dave/gate'));
+				gate.setGraphicSize(Std.int(gate.width * 1.2));
+				gate.updateHitbox();
+				gate.antialiasing = true;
+				gate.scrollFactor.set(0.9, 0.9);
+				gate.active = false;
+
+				sprites.add(gate);
+				add(gate);
+	
+				var stageFront:FlxSprite = new FlxSprite(-225, -125).loadGraphic(Paths.image('dave/grass'));
+				stageFront.setGraphicSize(Std.int(stageFront.width * 1.2));
+				stageFront.updateHitbox();
+				stageFront.antialiasing = true;
+				stageFront.active = false;
+				
+				sprites.add(stageFront);
+				add(stageFront);
+			}
+
 			case 'farm' | 'farm-night' | 'farm-sunset':
 				bgZoom = 0.8;
 
