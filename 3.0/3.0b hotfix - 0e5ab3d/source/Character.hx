@@ -59,6 +59,10 @@ class Character extends FlxSprite
 				animation.addByPrefix('singDOWN', 'Down', 24, false);
 				animation.addByPrefix('singLEFT', 'Left', 24, false);
 	
+				globalOffset = [0, -170];
+							
+				barColor = FlxColor.fromRGB(15, 95, 255);
+	
 				addOffset('idle');
 				addOffset("singUP", 18, 12);
 				addOffset("singRIGHT", 5, -2);
@@ -77,6 +81,10 @@ class Character extends FlxSprite
 				animation.addByPrefix('singDOWN', 'DOWN', 24, false);
 				animation.addByPrefix('singLEFT', 'LEFT', 24, false);
 		
+				globalOffset = [-140, -380];
+				
+				barColor = FlxColor.fromRGB(250, 179, 204);
+
 				addOffset('idle');
 				addOffset("singUP");
 				addOffset("singRIGHT");
