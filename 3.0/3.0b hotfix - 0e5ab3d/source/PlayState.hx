@@ -123,7 +123,7 @@ class PlayState extends MusicBeatState
 	public var bfGroup:FlxGroup;
 	public var gfGroup:FlxGroup;
 
-	public static var darkLevels:Array<String> = ['bambiFarmNight', 'daveHouse_night', 'unfairness', 'bedroomNight', 'backyard'];
+	public static var darkLevels:Array<String> = ['bambiFarmNight', 'daveHouse_night', 'daveHouse_night_old', 'unfairness', 'bedroomNight', 'backyard'];
 	public var sunsetLevels:Array<String> = ['bambiFarmSunset', 'daveHouse_Sunset'];
 
 	public var stupidx:Float = 0;
@@ -677,11 +677,11 @@ class PlayState extends MusicBeatState
 				}
 			
 			case 'interdimensional-but-polygonized':
-				var stage = SONG.song.toLowerCase() != 'interdimensional-but-polygonized' ? 'house-night' : 'house-night';
+				var stage = SONG.song.toLowerCase() != 'interdimensional-but-polygonized' ? 'house-night-old' : 'house-night-old';
 				revertedBG = createBackgroundSprites(stage, true);
 				for (bgSprite in revertedBG)
 				{
-					bgSprite.color = getBackgroundColor(SONG.song.toLowerCase() != 'interdimensional-but-polygonized' ? 'daveHouse_night' : 'daveHouse_night');
+					bgSprite.color = getBackgroundColor(SONG.song.toLowerCase() != 'interdimensional-but-polygonized' ? 'daveHouse_night_old' : 'daveHouse_night_old');
 					bgSprite.alpha = 0;
 				}
 		}
@@ -1400,6 +1400,7 @@ class PlayState extends MusicBeatState
 						stageName = 'daveHouse';
 						skyType = 'sky';
 					case 'house-night-old'
+						stageName = 'daveHouse_night_old';
 						skyType = 'sky_night';
 						assetType = 'night/';
 					case 'house-night':
